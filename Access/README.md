@@ -1,11 +1,11 @@
 ## Nmap
-
-
 ![](https://i.imgur.com/1jrYzz2.png)
+
 I found a ftp service is running, and next tried to login annoymous.
 
 ## FTP
 Through the Nmap result, I tried to log in FTP server.
+
 ![](https://i.imgur.com/rWyGfbl.png)
 
 In the "Engineer" dir, I found a dir named 'Access Control.zip', that sounds suspicious.
@@ -49,10 +49,12 @@ $ cat "Access Control"
 ![](https://i.imgur.com/7ncNDKQ.png)
 ## Telnet
 Use the account/password from "Access Control" file login.
+
 ![](https://i.imgur.com/DX54uPC.png)
 
 In the Desktop, I success found "user.txt".
-![](https://i.imgur.com/2Go85vl.png)
+
+![](https://i.imgur.com/MOjNGvR.png)
 ## Root
 Finally, at the most difficult level, I tried a lot of ways to get root, and I found the **"runas"** tips from the machine.
 I create a reverse shell in the attack machine first.
@@ -69,6 +71,9 @@ $ runas /savecred /user:Administrator shell.exe
 ```
 In this step, "runas" command had a special attritube named "/savecred", means the password that can be used to log in with the last user preset.
 success get the shell in the meterpreter.
+
 ![](https://i.imgur.com/oBBPKCP.png)
+
 root flag:
-![](https://i.imgur.com/t8yupI5.png)
+
+![](https://i.imgur.com/9UogihS.png)
