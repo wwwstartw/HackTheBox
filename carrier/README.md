@@ -1,6 +1,8 @@
 ## Nmap
 ![](https://i.imgur.com/XaMYmVO.png)
+
 ![](https://i.imgur.com/tmKsFVD.png)
+
 I found http, snmp service is running, and next tried to analyze it.
 ## SNMP
 By snmpwalk, I got a stranger string.
@@ -16,16 +18,19 @@ $ gobuster -u 10.10.10.105 -w /usr/share/seclists/Discovery/Web_Content/common.t
 
 ## doc
 That's tried to enter the doc dir, there are two files inside, which are the errorcodes.pdf and a picture.
+
 ![](https://i.imgur.com/VeJZAEZ.png)
 
 In the errorcodes.pdf file, that has a tip about account.
 
 ![](https://i.imgur.com/AsiwqIf.png)
+
 Through this document, I found default user **"admin"**.
 Success log in by admin/NET_45JDX23 !
 ## diag.php
 Enter this page, it has a command injection.
 First encode reverse code to base64:
+
 ![](https://i.imgur.com/7VQHNCW.png)
 
 And using burpsuite to got a reverse shell.
@@ -35,11 +40,13 @@ And using burpsuite to got a reverse shell.
 ![](https://i.imgur.com/V6Ti0g8.png)
 
 The user flag is:
-![](https://i.imgur.com/xJ27w2f.png)
+
+![](https://i.imgur.com/wFQhKOg.png)
 
 But through ifconfig, I found that the IP address of this host is actually **10.99.64.2**.
 ## Ticket.php
 ![](https://i.imgur.com/goTJsmb.png)
+
 According to the content, one of the three networks should be problematic with FTP.
 ```
 $ for i in $(seq 254); do nc -w 5 -vz 10.120.15.$i 21; done;
@@ -67,6 +74,7 @@ I tried to transfer the access in AS200 to this controlled host, and capture pac
 To do this, I need to modify the bgp routing table, and restart the network and quagga service.
 
 - modify bgpd.conf
+
 ![](https://i.imgur.com/luqW21r.png)
 
 - restart service
@@ -76,12 +84,14 @@ $ service quagga restart
 ```
 
 Finally, set up a complete FTP server on the target, using python3 to execute.
+
 ![](https://i.imgur.com/5CEvoUN.png)
+
 use ssh to log in.
 ```
 $ ssh root@10.10.10.105
 ```
 root flag:
-![](https://i.imgur.com/8q3Y2eT.png)
 
+![](https://i.imgur.com/bzSRpLq.png)
 
