@@ -1,2 +1,2 @@
 # HackTheBox
-Retired machine in HTB writeup.
+Retired machine in HackTheBox writeup.
